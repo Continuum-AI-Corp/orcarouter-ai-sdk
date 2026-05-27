@@ -1,0 +1,23 @@
+{
+	"compilerOptions": {
+		"target": "es2021",
+		"lib": ["es2021", "dom"],
+		"module": "esnext",
+		"moduleResolution": "bundler",
+		"strict": true,
+		"noImplicitReturns": true,
+		"noUncheckedIndexedAccess": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"esModuleInterop": true,
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true,
+		"declaration": true,
+		"noEmit": true,
+		"types": ["node", "vitest/globals"]
+	},
+	"include": ["src/**/*.ts"],
+	"exclude": ["node_modules", "dist"]
+}

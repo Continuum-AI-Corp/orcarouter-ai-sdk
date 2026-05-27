@@ -1,0 +1,62 @@
+{
+	"name": "orcarouter-ai-sdk-provider",
+	"version": "0.1.0",
+	"description": "The OrcaRouter provider for the Vercel AI SDK — access 150+ models from OpenAI, Anthropic, Google, xAI, DeepSeek, Qwen and others through a single OpenAI-compatible API with adaptive per-request routing.",
+	"license": "Apache-2.0",
+	"author": "Continuum-AI-Corp",
+	"homepage": "https://github.com/Continuum-AI-Corp/orcarouter-ai-sdk",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Continuum-AI-Corp/orcarouter-ai-sdk.git"
+	},
+	"bugs": {
+		"url": "https://github.com/Continuum-AI-Corp/orcarouter-ai-sdk/issues"
+	},
+	"keywords": ["ai-sdk", "vercel-ai-sdk", "orcarouter", "llm", "openai-compatible", "ai", "provider"],
+	"sideEffects": false,
+	"type": "module",
+	"main": "./dist/index.cjs",
+	"module": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"files": ["dist/**/*"],
+	"exports": {
+		"./package.json": "./package.json",
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js",
+			"require": "./dist/index.cjs"
+		}
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"scripts": {
+		"build": "tsup",
+		"clean": "rm -rf dist",
+		"dev": "tsup --watch",
+		"typecheck": "tsc --noEmit",
+		"lint": "biome check",
+		"format": "biome format --write",
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"prepublishOnly": "npm run build"
+	},
+	"dependencies": {
+		"@ai-sdk/openai-compatible": "^2.0.0",
+		"@ai-sdk/provider": "^2.0.0",
+		"@ai-sdk/provider-utils": "^4.0.0"
+	},
+	"peerDependencies": {
+		"zod": "^3.25.0 || ^4.0.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.3.0",
+		"@types/node": "^22.0.0",
+		"tsup": "^8.0.0",
+		"typescript": "^5.6.0",
+		"vitest": "^2.1.0"
+	},
+	"engines": {
+		"node": ">=18"
+	}
+}

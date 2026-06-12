@@ -20,10 +20,17 @@ describe("transformOrcaRouterRequestBody", () => {
 			expect(out).not.toHaveProperty("temperature");
 		});
 
-		it("omits temperature + top_k for Claude Opus 4.7", () => {
-			const out = transformOrcaRouterRequestBody(base("anthropic/claude-opus-4.7", { top_k: 40 }));
-			expect(out).not.toHaveProperty("temperature");
-			expect(out).not.toHaveProperty("top_k");
+		it("omits temperature + top_k for Claude Opus 4.7 and 4.8", () => {
+			for (const modelId of ["anthropic/claude-opus-4.7", "anthropic/claude-opus-4.8"]) {
+				const out = transformOrcaRouterRequestBody(base(modelId, { top_k: 40 }));
+				expect(out).not.toHaveProperty("temperature");
+				expect(out).not.toHaveProperty("top_k");
+			}
+		});
+
+		it("keeps temperature for earlier Claude Opus 4.x (not reasoning-locked)", () => {
+			const out = transformOrcaRouterRequestBody(base("anthropic/claude-opus-4.5"));
+			expect(out.temperature).toBe(0);
 		});
 
 		it("omits temperature for the gpt-5 family", () => {

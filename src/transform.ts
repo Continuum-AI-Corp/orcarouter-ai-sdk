@@ -24,8 +24,8 @@ const DEFAULT_ANTHROPIC_BUDGET = 8192;
  *   - OpenAI / Gemini / Grok / Qwen / Kimi → flat `reasoning_effort` passes through unchanged.
  *
  * Parameter quirks:
- *   - `orcarouter/*` virtual routers, Claude Opus 4.7, the gpt-5 family, and DeepSeek r1 reject
- *     `temperature` (and `top_k`) — omit them.
+ *   - `orcarouter/*` virtual routers, Claude Opus 4.7 / 4.8, the gpt-5 family, and DeepSeek r1
+ *     reject `temperature` (and `top_k`) — omit them.
  *   - Kimi K2.6 only accepts `temperature: 1` / `top_p: 0.95` — pin them.
  */
 export function transformOrcaRouterRequestBody(body: Record<string, unknown>): Record<string, unknown> {

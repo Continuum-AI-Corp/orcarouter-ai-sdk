@@ -15,11 +15,19 @@
  * Includes every `orcarouter/` virtual router (e.g. `orcarouter/auto`): the router picks
  * an upstream per request and may land on a reasoning model that rejects temperature, so
  * we omit it for the whole namespace.
+ *
+ * Only the reasoning-locked Anthropic flagships (Opus 4.7/4.8, Fable 5) are listed; earlier
+ * Opus 4.x accept temperature normally, so a blanket `claude-opus-4.` prefix would silently
+ * drop a working parameter. The OrcaRouter gateway currently absorbs these parameters before
+ * they reach the upstream, but that is undocumented channel behavior, so the client-side
+ * strip stays as defense in depth.
  */
 export function rejectsTemperature(modelId: string): boolean {
 	return (
 		modelId.startsWith("orcarouter/") ||
 		modelId.startsWith("anthropic/claude-opus-4.7") ||
+		modelId.startsWith("anthropic/claude-opus-4.8") ||
+		modelId.startsWith("anthropic/claude-fable-5") ||
 		modelId.startsWith("openai/gpt-5") ||
 		isDeepSeekReasoner(modelId)
 	);
@@ -30,7 +38,14 @@ export function requiresFixedSampling(modelId: string): boolean {
 	return modelId.startsWith("kimi/kimi-k2.6");
 }
 
-/** Anthropic Claude models that accept a native `thinking` block for extended reasoning. */
+/**
+ * Anthropic Claude models that accept a native `thinking` block for extended reasoning.
+ *
+ * Deliberately excludes Fable 5: its native API rejects every explicit thinking config
+ * (even `{type: "disabled"}` is a 400) — thinking is always on and depth is controlled
+ * by `output_config.effort`. A flat `reasoning_effort` passes through OrcaRouter without
+ * error, so Fable 5 takes the default pass-through path.
+ */
 export function isAnthropicThinkingModel(modelId: string): boolean {
 	return (
 		modelId.startsWith("anthropic/claude-opus-4") ||

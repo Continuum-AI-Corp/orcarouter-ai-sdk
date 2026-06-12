@@ -1,6 +1,6 @@
 {
 	"name": "orcarouter-ai-sdk-provider",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "The OrcaRouter provider for the Vercel AI SDK — access 150+ models from OpenAI, Anthropic, Google, xAI, DeepSeek, Qwen and others through a single OpenAI-compatible API with adaptive per-request routing.",
 	"license": "Apache-2.0",
 	"author": "Continuum-AI-Corp",
@@ -38,7 +38,8 @@
 		}
 	},
 	"publishConfig": {
-		"access": "public"
+		"access": "public",
+		"registry": "https://registry.npmjs.org"
 	},
 	"scripts": {
 		"build": "tsup",

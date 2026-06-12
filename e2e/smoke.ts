@@ -49,10 +49,10 @@ const cases: Case[] = [
 		},
 	},
 	{
-		name: "generateText: anthropic/claude-opus-4.7 + reasoningEffort high",
+		name: "generateText: anthropic/claude-opus-4.8 + reasoningEffort high",
 		run: async () => {
 			const { text, reasoningText } = await generateText({
-				model: orcarouter("anthropic/claude-opus-4.7"),
+				model: orcarouter("anthropic/claude-opus-4.8"),
 				prompt: "What is 17 * 23? Answer with just the number.",
 				providerOptions: { orcarouter: { reasoningEffort: "high" } },
 			})
@@ -63,10 +63,10 @@ const cases: Case[] = [
 		},
 	},
 	{
-		name: "generateText: openai/gpt-5 + reasoningEffort low",
+		name: "generateText: openai/gpt-5.5 + reasoningEffort low",
 		run: async () => {
 			const { text } = await generateText({
-				model: orcarouter("openai/gpt-5"),
+				model: orcarouter("openai/gpt-5.5"),
 				prompt: "Reply with the single word: pong",
 				providerOptions: { orcarouter: { reasoningEffort: "low" } },
 			})

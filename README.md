@@ -51,11 +51,12 @@ const model = orcarouter("anthropic/claude-opus-4.7")
 Pick any model by its OrcaRouter id, for example:
 
 - `orcarouter/auto` — adaptive routing (recommended default)
-- `anthropic/claude-opus-4.7`, `anthropic/claude-sonnet-4.6`
-- `openai/gpt-5`, `openai/gpt-5-mini`
-- `google/gemini-3-flash-preview`
+- `anthropic/claude-opus-4.8`, `anthropic/claude-sonnet-4.6`
+- `openai/gpt-5.5`, `openai/gpt-5-mini`
+- `google/gemini-3.5-flash`
+- `grok/grok-4.3`, `deepseek/deepseek-v4-pro`, `minimax/minimax-m2.7`
 - `deepseek/deepseek-reasoner`
-- `kimi/kimi-k2.6`, `z-ai/glm-4.5`, `qwen/qwen3.6-flash`
+- `kimi/kimi-k2.6`, `z-ai/glm-4.5`, `qwen/qwen3.7-max`
 
 The full catalog and live pricing are at [orcarouter.ai/models](https://www.orcarouter.ai/models).
 
@@ -67,11 +68,11 @@ Pass a reasoning effort via the AI SDK and this provider forwards it in each ups
 - **OpenAI / Gemini / Grok / Qwen / Kimi** receive a flat `reasoning_effort`.
 - **DeepSeek r1 / reasoner** reason automatically; reasoning control fields are stripped.
 
-Upstream parameter quirks are also handled automatically — for example `temperature` is omitted for `orcarouter/*` routers, Claude Opus 4.7, and the gpt-5 family (which reject it), and Kimi K2.6 is pinned to its only accepted `temperature` / `top_p`.
+Upstream parameter quirks are also handled automatically — for example `temperature` is omitted for `orcarouter/*` routers, Claude Opus 4.7 / 4.8, and the gpt-5 family (which reject it), and Kimi K2.6 is pinned to its only accepted `temperature` / `top_p`.
 
 ## Notes on `orcarouter/auto`
 
-The adaptive router's candidate pool may include upstreams that don't support function/tool calling. If a tool-calling request fails with a "function calling not enabled" error, pin a tool-capable model (e.g. `anthropic/claude-opus-4.7`) or adjust the pool in the [routing console](https://www.orcarouter.ai/console/routing).
+The adaptive router's candidate pool may include upstreams that don't support function/tool calling. If a tool-calling request fails with a "function calling not enabled" error, pin a tool-capable model (e.g. `anthropic/claude-opus-4.8`) or adjust the pool in the [routing console](https://www.orcarouter.ai/console/routing).
 
 ## License
 

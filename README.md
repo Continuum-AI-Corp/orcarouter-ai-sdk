@@ -51,7 +51,7 @@ const model = orcarouter("anthropic/claude-opus-4.7")
 Pick any model by its OrcaRouter id, for example:
 
 - `orcarouter/auto` — adaptive routing (recommended default)
-- `anthropic/claude-opus-4.8`, `anthropic/claude-sonnet-4.6`
+- `anthropic/claude-fable-5`, `anthropic/claude-opus-4.8`, `anthropic/claude-sonnet-4.6`
 - `openai/gpt-5.5`, `openai/gpt-5-mini`
 - `google/gemini-3.5-flash`
 - `grok/grok-4.3`, `deepseek/deepseek-v4-pro`, `minimax/minimax-m2.7`
@@ -68,7 +68,7 @@ Pass a reasoning effort via the AI SDK and this provider forwards it in each ups
 - **OpenAI / Gemini / Grok / Qwen / Kimi** receive a flat `reasoning_effort`.
 - **DeepSeek r1 / reasoner** reason automatically; reasoning control fields are stripped.
 
-Upstream parameter quirks are also handled automatically — for example `temperature` is omitted for `orcarouter/*` routers, Claude Opus 4.7 / 4.8, and the gpt-5 family (which reject it), and Kimi K2.6 is pinned to its only accepted `temperature` / `top_p`.
+Upstream parameter quirks are also handled automatically — for example `temperature` is omitted for `orcarouter/*` routers, Claude Opus 4.7 / 4.8, Claude Fable 5, and the gpt-5 family (which reject it), and Kimi K2.6 is pinned to its only accepted `temperature` / `top_p`.
 
 ## Notes on `orcarouter/auto`
 

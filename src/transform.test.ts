@@ -20,12 +20,18 @@ describe("transformOrcaRouterRequestBody", () => {
 			expect(out).not.toHaveProperty("temperature");
 		});
 
-		it("omits temperature + top_k for Claude Opus 4.7 and 4.8", () => {
-			for (const modelId of ["anthropic/claude-opus-4.7", "anthropic/claude-opus-4.8"]) {
+		it("omits temperature + top_k for Claude Opus 4.7/4.8 and Fable 5", () => {
+			for (const modelId of ["anthropic/claude-opus-4.7", "anthropic/claude-opus-4.8", "anthropic/claude-fable-5"]) {
 				const out = transformOrcaRouterRequestBody(base(modelId, { top_k: 40 }));
 				expect(out).not.toHaveProperty("temperature");
 				expect(out).not.toHaveProperty("top_k");
 			}
+		});
+
+		it("passes reasoning_effort through for Fable 5 (no thinking-block conversion)", () => {
+			const out = transformOrcaRouterRequestBody(base("anthropic/claude-fable-5", { reasoning_effort: "high" }));
+			expect(out.reasoning_effort).toBe("high");
+			expect(out).not.toHaveProperty("thinking");
 		});
 
 		it("keeps temperature for earlier Claude Opus 4.x (not reasoning-locked)", () => {
